@@ -1,13 +1,12 @@
 #Quick Editor
 Quick Editor is Bootstrap 3 based Angular 2 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
-
 The editor provides Metadata way of configuration, which saves energy of writing lots UI code.
 
 Currently, the editor supports 3 types of input,
 
-*Input
-*TextArea
-*Google Map
+* Input
+* TextArea
+* Google Map
 
 More types of inputs will be added soon.
 
