@@ -15,7 +15,7 @@
     "angular",
     "angular2"
   ],
-  "author": "Li Wen",
+  "author": "BTLW",
   "license": "ISC",
   "dependencies": {
     "angular2": "^2.0.0-beta.17",
