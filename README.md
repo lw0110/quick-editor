@@ -10,8 +10,34 @@ Currently, the editor supports 3 types of input,
 
 More types of inputs will be added soon.
 
+#Feature
+* onSave onDelete event binder
+* UI Read-Only Mode
+* Dirty field indicator
+* Data reset after cancel edit
+
 #How To Use
+Before using the script, please add following library into html header before coding
+```
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?v=3.23&key=your_google_api_key"></script>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+```
+
+The field name in EditorMetadata should be same as property name in data model.
+
 ```javascript
+export interface Place {
+    id: number,
+    name: string,
+    address: string,
+    latlng:[number, number],
+    desc: string,
+    distance: number,
+    tags: string[]
+}
+
 @Component({
     template: `
     <div class="panel panel-default" *ngFor="let place of places;">
