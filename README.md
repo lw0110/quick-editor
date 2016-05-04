@@ -20,8 +20,8 @@ More types of inputs will be added soon.
 Before using the script, please add following library into html header before coding
 ```
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?v=3.23&key=your_google_api_key"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 ```
 
