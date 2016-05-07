@@ -1,6 +1,7 @@
 import {Input} from "angular2/core";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
+import {Control} from "angular2/common";
 
 export class QuickEditorElement implements Editable {
     origValue:any;
@@ -12,6 +13,8 @@ export class QuickEditorElement implements Editable {
     metadata:EditorMetadata;
     @Input()
     id:any;
+    @Input()
+    formControl:Control;
 
     set originalValue(value:any) {
         this.origValue = value;

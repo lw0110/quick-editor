@@ -1,24 +1,32 @@
 import {
-    DynamicComponentLoader, ElementRef, Component, Input, Output, EventEmitter, AfterViewInit, ViewContainerRef,
+    DynamicComponentLoader, Component, Input, Output, EventEmitter, AfterViewInit, ViewContainerRef,
     ComponentRef, ViewChild
 } from 'angular2/core';
 import {Type} from 'angular2/src/facade/lang';
 import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
+import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "angular2/common";
 
 @Component({
     selector: 'quick-editor-input',
     template: `
-    <div [ngClass]="{'form-group': true, 'has-warning': isDirty(), 'has-feedback': isDirty}">
+    <style>
+        .ng-invalid {
+            border-color: #FF0000;
+        }
+    </style>
+    <div [ngClass]="{'form-group': true, 'has-warning': isDirty(), 'has-feedback': isDirty()}">
         <label class="col-sm-2 control-label">{{metadata.label}}</label>
         <div class="col-sm-10">
-            <input class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" [placeholder]="metadata.placeholder">
+            <input [id]="metadata.field" class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" 
+                [placeholder]="metadata.placeholder" [ngFormControl]="formControl">
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>    
     `,
-    inputs: ['originalValue']
+    inputs: ['originalValue'],
+    directives: [FORM_DIRECTIVES]
 })
 
 class QuickEditorInputComponent extends QuickEditorElement {
@@ -34,7 +42,9 @@ class QuickEditorInputComponent extends QuickEditorElement {
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>   
-    `
+    `,
+    inputs: ['originalValue'],
+    directives: [FORM_DIRECTIVES]
 })
 
 class QuickEditorTextAreaComponent extends QuickEditorElement {
@@ -56,7 +66,9 @@ declare var google: any;
         div[id^="qe-map-"] {
             height: 300px;
         }
-    `]
+    `],
+    inputs: ['originalValue'],
+    directives: [FORM_DIRECTIVES]
 })
 
 class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterViewInit {
@@ -107,7 +119,7 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
 @Component({
     selector: 'quick-editor',
     template: `
-    <form class="form-horizontal">
+    <form [ngFormModel]="quickEditorModel" class="form-horizontal">
         <div #child></div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -126,9 +138,8 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
             </div>
         </div>
     </form>
-    
     `,
-    directives: [QuickEditorInputComponent]
+    directives: [QuickEditorInputComponent, FORM_DIRECTIVES]
 })
 
 export class QuickEditorComponent {
@@ -143,6 +154,7 @@ export class QuickEditorComponent {
 
     childrenRef:Editable[] = [];
     isEditable:boolean = false;
+    quickEditorModel:ControlGroup;
 
     @ViewChild('child', {read: ViewContainerRef})
     childContentPlace:ViewContainerRef;
@@ -154,7 +166,8 @@ export class QuickEditorComponent {
     };
 
     constructor(private dcl:DynamicComponentLoader,
-                private elemRef:ElementRef) {
+                private fb:FormBuilder) {
+        this.quickEditorModel = fb.group({});
     }
 
     ngAfterViewInit() {
@@ -162,13 +175,18 @@ export class QuickEditorComponent {
         // https://github.com/angular/angular/issues/7854
         var fn = function(array:EditorMetadata[]) {
             if(array.length == 0) return;
-            let metadata = array[0];
+            let metadata:EditorMetadata = array[0];
             this.dcl.loadNextToLocation(QuickEditorComponent.EDITOR_TYPE_MAP[metadata.type], this.childContentPlace)
                 .then((ref:ComponentRef) => {
+                    // update validator
+                    this.quickEditorModel.addControl(metadata.field, metadata.required ? new Control('', Validators.required) : new Control());
+
+                    ref.instance.formControl = this.quickEditorModel.find(metadata.field);
                     ref.instance.metadata = metadata;
                     ref.instance.dataModel = this.dataModel;
                     ref.instance.originalValue = this.dataModel[metadata.field];
                     ref.instance.id = this.dataModel.id;
+
                     this.childrenRef.push(ref.instance);
                     fn.apply(this, [array.slice(1)]);
                 });
