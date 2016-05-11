@@ -1,4 +1,4 @@
-#Angular 2 Quick Editor
+#Angular 2 (rc.1) Quick Editor
 Quick Editor is Bootstrap 3 based Angular 2 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
 The editor provides Metadata way of configuration, which saves energy of writing lots UI code.
 

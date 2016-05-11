@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "noImplicitAny": true,
+    "target": "es6",
     "module": "commonjs",
-    "target": "ES5",
+    "moduleResolution": "node",
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "declaration": true
+    "removeComments": false,
+    "noImplicitAny": false
   },
   "files": [
     "quick-editor.ts"

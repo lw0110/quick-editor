@@ -1,12 +1,11 @@
 import {
     DynamicComponentLoader, Component, Input, Output, EventEmitter, AfterViewInit, ViewContainerRef,
-    ComponentRef, ViewChild
-} from 'angular2/core';
-import {Type} from 'angular2/src/facade/lang';
+    ComponentRef, ViewChild, Type
+} from '@angular/core';
 import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
-import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "angular2/common";
+import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "@angular/common";
 
 @Component({
     selector: 'quick-editor-input',
@@ -38,7 +37,7 @@ class QuickEditorInputComponent extends QuickEditorElement {
     <div [ngClass]="{'form-group': true, 'has-warning': isDirty(), 'has-feedback': isDirty()}">
         <label class="col-sm-2 control-label">{{metadata.label}}</label>
         <div class="col-sm-10">
-            <textarea class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" rows="3"></textarea>
+            <textarea class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" rows="3" [ngFormControl]="formControl"></textarea>
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>   
@@ -50,7 +49,7 @@ class QuickEditorInputComponent extends QuickEditorElement {
 class QuickEditorTextAreaComponent extends QuickEditorElement {
 }
 
-declare var google: any;
+declare var google:any;
 
 @Component({
     selector: 'quick-editor-google-map',
@@ -72,7 +71,7 @@ declare var google: any;
 })
 
 class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterViewInit {
-    marker: any;
+    marker:any;
     map:any;
 
     ngAfterViewInit():any {
@@ -103,12 +102,12 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
     resetValue() {
         super.resetValue();
         let centerLatLng = {lat: this.currentValue[0], lng: this.currentValue[1]};
-        if(this.marker) {
+        if (this.marker) {
             this.marker.setPosition(centerLatLng);
             this.marker.setDraggable(this.isEditable);
         }
 
-        if(this.map) {
+        if (this.map) {
             this.map.setCenter(centerLatLng);
         }
 
@@ -123,7 +122,7 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
         <div #child></div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-info" (click)="onSaveClicked()" [disabled]="!isEditable">
+                <button class="btn btn-info" (click)="onSaveClicked()" [disabled]="!isEditable || !isFormValid()">
                     <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>&nbsp;SAVE
                 </button>
                 <button class="btn btn-info" (click)="onCancelClicked()" [disabled]="!isEditable">
@@ -173,11 +172,11 @@ export class QuickEditorComponent {
     ngAfterViewInit() {
         // use recursive func to resolve wrong insertion ordering
         // https://github.com/angular/angular/issues/7854
-        var fn = function(array:EditorMetadata[]) {
-            if(array.length == 0) return;
+        var fn = function (array:EditorMetadata[]) {
+            if (array.length == 0) return;
             let metadata:EditorMetadata = array[0];
             this.dcl.loadNextToLocation(QuickEditorComponent.EDITOR_TYPE_MAP[metadata.type], this.childContentPlace)
-                .then((ref:ComponentRef) => {
+                .then((ref:ComponentRef<any>) => {
                     // update validator
                     this.quickEditorModel.addControl(metadata.field, metadata.required ? new Control('', Validators.required) : new Control());
 
@@ -219,5 +218,9 @@ export class QuickEditorComponent {
 
     onDeleteClicked() {
         this.onDelete.emit(this.dataModel);
+    }
+
+    isFormValid() {
+        return this.quickEditorModel.valid
     }
 }

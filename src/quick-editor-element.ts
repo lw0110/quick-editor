@@ -1,14 +1,14 @@
-import {Input} from "angular2/core";
+import {Input} from "@angular/core";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
-import {Control} from "angular2/common";
+import {Control} from "@angular/common";
 
 export class QuickEditorElement implements Editable {
     origValue:any;
     currentValue:any;
     isEditable:boolean = false;
-    dataModel: any;
-    
+    dataModel:any;
+
     @Input()
     metadata:EditorMetadata;
     @Input()
@@ -25,7 +25,7 @@ export class QuickEditorElement implements Editable {
         this.currentValue = this.origValue;
         this.isEditable = false;
     }
-    
+
     onEdit() {
         this.isEditable = true;
     }
