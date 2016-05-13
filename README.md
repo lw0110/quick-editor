@@ -17,12 +17,40 @@ More types of inputs will be added soon.
 * Data reset after cancel edit
 
 #How To Use
+Setup the quick-editor through NPM
+```javascirpt
+npm install quick-editor
+```
+
+Include the quick-editor component in systemjs.config.js
+```javascript
+var map = {
+    'app':                        'dist', // 'dist',
+    'rxjs':                       'node_modules/rxjs',
+    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
+    '@angular':                   'node_modules/@angular',
+    'quick-editor':               'node_modules/quick-editor'
+};
+
+var packages = {
+    'app':                        { main: 'main.js',  defaultExtension: 'js' },
+    'rxjs':                       { defaultExtension: 'js' },
+    'angular2-in-memory-web-api': { defaultExtension: 'js' },
+    'quick-editor':               { main: 'quick-editor.js', defaultExtension: 'js' }
+};
+```
+
 Before using the script, please add following library into html header before coding.
 ```
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?v=3.23&key=your_google_api_key"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+```
+
+Import the Quick Editor Classes when required
+```javascript
+import {QuickEditorComponent, EditorMetadata, EditorMetadataType} from "quick-editor";
 ```
 
 The field name in EditorMetadata should be same as property name in data model. Location attribute should be a tuple type with 2 number element, represents latitude and longitude.
