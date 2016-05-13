@@ -19,7 +19,7 @@ More types of inputs will be added soon.
 #How To Use
 Setup the quick-editor through NPM
 ```javascirpt
-npm install quick-editor
+npm install quick-editor --save
 ```
 
 Include the quick-editor component in systemjs.config.js
