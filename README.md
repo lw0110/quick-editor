@@ -1,7 +1,4 @@
 #Angular 2 (rc.1) Quick Editor
-[![version](https://img.shields.io/npm/v/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
-[![downloads](https://img.shields.io/npm/dm/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
-[![MIT Licence](https://img.shields.io/npm/l/quick-editor.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 Quick Editor is Bootstrap 3 based Angular 2 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
 The editor provides Metadata way of configuration, which saves energy of writing lots UI code.
 
@@ -18,6 +15,9 @@ More types of inputs will be added soon.
 * UI Read-Only Mode
 * Dirty field indicator
 * Data reset after cancel edit
+* Save Cancel Edit and Delete buttons with icon are provided
+
+![quick-editor](https://cloud.githubusercontent.com/assets/10338146/15250364/06b16490-1957-11e6-9950-690d904bbba2.png)
 
 #How To Use
 Setup the quick-editor through NPM
