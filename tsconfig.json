@@ -7,10 +7,30 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "paths": {
+      "@angular/core": [
+        "jspm_packages/npm/@angular/core@2.0.0-rc.1"
+      ],
+      "@angular/common": [
+        "jspm_packages/npm/@angular/common@2.0.0-rc.1"
+      ],
+      "@angular/platform-browser-dynamic": [
+        "jspm_packages/npm/@angular/platform-browser-dynamic@2.0.0-rc.1"
+      ],
+      "rxjs/*": [
+        "jspm_packages/npm/rxjs@5.0.0-beta.6/*"
+      ]
+    }
   },
   "files": [
-    "quick-editor.ts"
+    "./typings/tsd.d.ts",
+    "./quick-editor.ts",
+    "./src/editable.ts",
+    "./src/editor-metadata.ts",
+    "./src/quick-editor.component.ts",
+    "./src/quick-editor-element.ts"
   ],
   "exclude": [
     "node_modules"

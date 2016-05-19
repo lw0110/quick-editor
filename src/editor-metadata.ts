@@ -2,6 +2,7 @@ export class EditorMetadataType {
     static TextInput = 'TextInput';
     static TextArea = 'TextArea';
     static GoogleMap = 'GoogleMap';
+    static TagsInput = 'TagsInput';
 }
 
 export interface EditorMetadata {

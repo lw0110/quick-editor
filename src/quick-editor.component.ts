@@ -1,11 +1,12 @@
 import {
     DynamicComponentLoader, Component, Input, Output, EventEmitter, AfterViewInit, ViewContainerRef,
-    ComponentRef, ViewChild, Type
+    ComponentRef, ViewChild, Type, ElementRef, Inject, OnInit
 } from '@angular/core';
 import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
 import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "@angular/common";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'quick-editor-input',
@@ -116,6 +117,52 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
 }
 
 @Component({
+    selector: 'quick-editor-tags-input',
+    template: `
+    <div [ngClass]="{'form-group': true, 'has-warning': isDirty(), 'has-feedback': isDirty()}">
+        <label class="col-sm-2 control-label">{{metadata.label}}</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="tokenfield" value="red,green,blue" />
+            <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+        </div>
+    </div>
+    `,
+    styleUrls: [
+        '../node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css',
+        '../node_modules/bootstrap-tokenfield/dist/css/tokenfield-typeahead.min.css'
+    ]
+})
+
+class QuickEditorTagsInputComponent extends QuickEditorElement {
+
+    elementRef:ElementRef;
+
+    constructor(@Inject(ElementRef) elementRef:ElementRef) {
+        super();
+        this.elementRef = elementRef;
+    }
+
+    ngAfterViewInit() {
+        console.log('constructor has been called');
+        System.import('node_modules/bootstrap-tokenfield/dist/bootstrap-tokenfield.js')
+            .then(tokenfield => {
+                let field:any = $(this.elementRef.nativeElement).find('#tokenfield');
+                // $(this.elementRef.nativeElement).find('#tokenfield').autocomplete({
+                //     source: ['red', 'blue', 'green', 'yellow', 'violet', 'brown', 'purple', 'black', 'white'],
+                //     delay: 100
+                // });
+                field.tokenfield({
+                    autocomplete: {
+                        source: ['red', 'blue', 'green', 'yellow', 'violet', 'brown', 'purple', 'black', 'white'],
+                        delay: 100
+                    },
+                    showAutocompleteOnFocus: true
+                });
+            });
+    }
+}
+
+@Component({
     selector: 'quick-editor',
     template: `
     <form [ngFormModel]="quickEditorModel" class="form-horizontal">
@@ -161,7 +208,8 @@ export class QuickEditorComponent {
     static EDITOR_TYPE_MAP:{[key:string]:Type;} = {
         'TextInput': QuickEditorInputComponent,
         'TextArea': QuickEditorTextAreaComponent,
-        'GoogleMap': QuickEditorGoogleMapComponent
+        'GoogleMap': QuickEditorGoogleMapComponent,
+        'TagsInput': QuickEditorTagsInputComponent
     };
 
     constructor(private dcl:DynamicComponentLoader,
