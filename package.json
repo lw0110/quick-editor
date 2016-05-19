@@ -16,7 +16,7 @@
     "angular2"
   ],
   "author": "BTLW",
-  "license": "ISC",
+  "license": "MIT",
   "typings": "./quick-editor.d.ts",
   "jspm": true,
   "devDependencies": {
