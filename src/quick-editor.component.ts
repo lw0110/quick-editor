@@ -6,7 +6,8 @@ import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
 import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "@angular/common";
-import * as $ from 'jquery';
+
+declare var jQuery:any;
 
 @Component({
     selector: 'quick-editor-input',
@@ -126,11 +127,7 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>
-    `,
-    styleUrls: [
-        '../node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css',
-        '../node_modules/bootstrap-tokenfield/dist/css/tokenfield-typeahead.min.css'
-    ]
+    `
 })
 
 class QuickEditorTagsInputComponent extends QuickEditorElement {
@@ -143,22 +140,13 @@ class QuickEditorTagsInputComponent extends QuickEditorElement {
     }
 
     ngAfterViewInit() {
-        console.log('constructor has been called');
-        System.import('node_modules/bootstrap-tokenfield/dist/bootstrap-tokenfield.js')
-            .then(tokenfield => {
-                let field:any = $(this.elementRef.nativeElement).find('#tokenfield');
-                // $(this.elementRef.nativeElement).find('#tokenfield').autocomplete({
-                //     source: ['red', 'blue', 'green', 'yellow', 'violet', 'brown', 'purple', 'black', 'white'],
-                //     delay: 100
-                // });
-                field.tokenfield({
-                    autocomplete: {
-                        source: ['red', 'blue', 'green', 'yellow', 'violet', 'brown', 'purple', 'black', 'white'],
-                        delay: 100
-                    },
-                    showAutocompleteOnFocus: true
-                });
-            });
+        jQuery(this.elementRef.nativeElement).find('#tokenfield').tokenfield({
+            autocomplete: {
+                source: ['red', 'blue', 'green', 'yellow', 'violet', 'brown', 'purple', 'black', 'white'],
+                delay: 100
+            },
+            showAutocompleteOnFocus: true
+        });
     }
 }
 
