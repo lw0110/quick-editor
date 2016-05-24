@@ -1,6 +1,6 @@
 {
   "name": "quick-editor",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Angular 2 Bootstrap based editor",
   "main": "quick-editor.js",
   "scripts": {
@@ -42,7 +42,7 @@
     "typings": "^0.8.1"
   },
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "tsc -d"
   },
   "typings": "./quick-editor.d.ts"
 }

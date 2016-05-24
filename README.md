@@ -6,11 +6,12 @@
 Quick Editor is Bootstrap 3 based Angular 2 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
 The editor provides Metadata way of configuration, which saves energy of writing lots UI code.
 
-Currently, the editor supports 3 types of input,
+Currently, the editor supports 4 types of input,
 
 * Input
 * TextArea
 * Google Map
+* Tags (integrated from http://sliptree.github.io/bootstrap-tokenfield/)
 
 More types of inputs will be added soon.
 
@@ -49,10 +50,15 @@ var packages = {
 
 Before using the script, please add following library into html header before coding.
 ```
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?v=3.23&key=your_google_api_key"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css">
+<link rel="stylesheet" href="node_modules/bootstrap-tokenfield/dist/css/tokenfield-typeahead.min.css">
 ```
 
 Import the Quick Editor Classes when required
@@ -60,7 +66,8 @@ Import the Quick Editor Classes when required
 import {QuickEditorComponent, EditorMetadata, EditorMetadataType} from "quick-editor";
 ```
 
-The field name in EditorMetadata should be same as property name in data model. Location attribute should be a tuple type with 2 number element, represents latitude and longitude.
+The field name in EditorMetadata should be same as property name in data model.
+Location attribute should be a tuple type with 2 number element, represents latitude and longitude. Tags attribute should be an array.
 
 ```javascript
 export interface Place {
@@ -108,8 +115,11 @@ export class PageEditComponent implements OnInit {
         field: 'latlng',
         placeholder: '',
         type: EditorMetadataType.GoogleMap
+    }, {
+       label: 'Tags',
+       field: 'tags',
+       placeholder: 'Tags to describe the place',
+       type: EditorMetadataType.TagsInput
     }];
 ...}
 ```
-#Development
-Development on the library project, requires jspm and typescript@next

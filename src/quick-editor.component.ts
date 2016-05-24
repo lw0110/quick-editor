@@ -1,7 +1,17 @@
 import {
-    DynamicComponentLoader, Component, Input, Output, EventEmitter, AfterViewInit, ViewContainerRef,
-    ComponentRef, ViewChild, Type, ElementRef, Inject, OnInit
-} from '@angular/core';
+    DynamicComponentLoader,
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    AfterViewInit,
+    ViewContainerRef,
+    ComponentRef,
+    ViewChild,
+    ElementRef,
+    Inject,
+    Type
+} from "@angular/core";
 import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
@@ -123,7 +133,7 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
     <div [ngClass]="{'form-group': true, 'has-warning': isDirty(), 'has-feedback': isDirty()}">
         <label class="col-sm-2 control-label">{{metadata.label}}</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="tokenfield" value="red,green,blue" />
+            <input type="text" class="form-control" id="tokenfield" [value]="currentValue"/>
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>
@@ -133,6 +143,10 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
 class QuickEditorTagsInputComponent extends QuickEditorElement {
 
     elementRef:ElementRef;
+    tokenFieldRef:any;
+
+    @Input()
+    autoCompleteSource:String[] = [];
 
     constructor(@Inject(ElementRef) elementRef:ElementRef) {
         super();
@@ -140,14 +154,41 @@ class QuickEditorTagsInputComponent extends QuickEditorElement {
     }
 
     ngAfterViewInit() {
-        jQuery(this.elementRef.nativeElement).find('#tokenfield').tokenfield({
+        var _this = this;
+        this.tokenFieldRef = jQuery(this.elementRef.nativeElement).find('#tokenfield');
+        this.tokenFieldRef.tokenfield({
             autocomplete: {
-                source: ['red', 'blue', 'green', 'yellow', 'violet', 'brown', 'purple', 'black', 'white'],
+                source: _this.autoCompleteSource,
                 delay: 100
             },
             showAutocompleteOnFocus: true
+        }).on('tokenfield:createdtoken', function () {
+            _this.updateCurrentValueFromUI();
+        }).on('tokenfield:removedtoken', function () {
+            _this.updateCurrentValueFromUI();
+        });
+        this.tokenFieldRef.tokenfield('disable');
+    }
+
+    onEdit() {
+        super.onEdit();
+        this.tokenFieldRef.tokenfield('enable');
+    }
+
+    resetValue() {
+        super.resetValue();
+        if (this.tokenFieldRef) {
+            this.tokenFieldRef.tokenfield('disable');
+            this.tokenFieldRef.tokenfield('setTokens', this.origValue);
+        }
+    }
+
+    private updateCurrentValueFromUI():void {
+        this.currentValue = this.tokenFieldRef.tokenfield('getTokens').map(function (item) {
+            return item.value;
         });
     }
+
 }
 
 @Component({
