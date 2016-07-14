@@ -1,4 +1,4 @@
-#Angular 2 (rc.1) Quick Editor
+#Angular 2 (rc.4) Quick Editor
 [![version](https://img.shields.io/npm/v/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![downloads](https://img.shields.io/npm/dm/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![MIT Licence](https://img.shields.io/npm/l/quick-editor.svg?style=flat-square)](https://opensource.org/licenses/MIT)
