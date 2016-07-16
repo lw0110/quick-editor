@@ -16,6 +16,7 @@ import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
 import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "@angular/common";
+import {isArray} from "rxjs/util/isArray";
 
 declare var jQuery:any;
 
@@ -147,12 +148,11 @@ class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterV
     }
 
     onSearchGeocode() {
-        let currentMap = this.map;
-        let currentMarker = this.marker;
+        let _this = this;
         this.geocoder.geocode({'address': this.geocodeStr}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
-                currentMap.setCenter(results[0].geometry.location);
-                currentMarker.setPosition(results[0].geometry.location);
+                _this.map.setCenter(results[0].geometry.location);
+                _this.marker.setPosition(results[0].geometry.location);
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
@@ -185,6 +185,15 @@ class QuickEditorTagsInputComponent extends QuickEditorElement {
     constructor(@Inject(ElementRef) elementRef:ElementRef) {
         super();
         this.elementRef = elementRef;
+    }
+
+    set originalValue(value:any) {
+        if(!isArray(value)) {
+            value = [];
+        }
+
+        this.origValue = value.slice(0);
+        this.resetValue();
     }
 
     ngAfterViewInit() {

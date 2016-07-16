@@ -38,7 +38,7 @@ export class QuickEditorElement implements Editable {
     }
 
     isDirty() {
-        if (isArray(this.currentValue)) {
+        if (isArray(this.currentValue) && isArray(this.origValue)) {
             return !this.eqArray(this.currentValue, this.origValue);
         } else {
             return this.currentValue !== this.origValue;
