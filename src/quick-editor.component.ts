@@ -70,7 +70,7 @@ declare var google:any;
     <div class="form-group">
         <label class="col-sm-2 control-label">{{metadata.label}}</label>
         <div class="col-sm-10">
-            <div [id]="'qe-map-floating-panel-' + id">
+            <div [id]="'qe-map-floating-panel-' + id" [hidden]="!isEditable">
                 <input type="textbox" [(ngModel)]="geocodeStr">
                 <input type="button" value="Geocode" (click)="onSearchGeocode()">
             </div>

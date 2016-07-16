@@ -21,6 +21,7 @@ More types of inputs will be added soon.
 * Dirty field indicator
 * Data reset after cancel edit
 * Save Cancel Edit and Delete buttons with icon are provided
+* Google Map Edit with draggble marker and geocode search
 
 ![quick-editor](https://cloud.githubusercontent.com/assets/10338146/15510393/a6c9b684-2209-11e6-8b90-fcea5c52c051.png)
 
