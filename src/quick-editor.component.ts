@@ -15,8 +15,11 @@ import {
 import {QuickEditorElement} from "./quick-editor-element";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
-import {ControlGroup, Validators, FormBuilder, FORM_DIRECTIVES, Control} from "@angular/common";
 import {isArray} from "rxjs/util/isArray";
+import {
+    REACTIVE_FORM_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, Validators, FormGroup,
+    FormControl, REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS
+} from "@angular/forms";
 
 declare var jQuery:any;
 
@@ -32,13 +35,14 @@ declare var jQuery:any;
         <label class="col-sm-2 control-label">{{metadata.label}}</label>
         <div class="col-sm-10">
             <input [id]="metadata.field" class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" 
-                [placeholder]="metadata.placeholder" [ngFormControl]="formControl">
+                [placeholder]="metadata.placeholder" [formControl]="formControl">
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>    
     `,
     inputs: ['originalValue'],
-    directives: [FORM_DIRECTIVES]
+    providers: [REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS],
+    directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 
 class QuickEditorInputComponent extends QuickEditorElement {
@@ -50,13 +54,14 @@ class QuickEditorInputComponent extends QuickEditorElement {
     <div [ngClass]="{'form-group': true, 'has-warning': isDirty(), 'has-feedback': isDirty()}">
         <label class="col-sm-2 control-label">{{metadata.label}}</label>
         <div class="col-sm-10">
-            <textarea class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" rows="3" [ngFormControl]="formControl"></textarea>
+            <textarea class="form-control" [(ngModel)]="currentValue" [readonly]="!isEditable" rows="3" [formControl]="formControl"></textarea>
             <span *ngIf="isDirty()" class="glyphicon glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>   
     `,
     inputs: ['originalValue'],
-    directives: [FORM_DIRECTIVES]
+    providers: [REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS],
+    directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 
 class QuickEditorTextAreaComponent extends QuickEditorElement {
@@ -97,6 +102,7 @@ declare var google:any;
         }
     `],
     inputs: ['originalValue'],
+    providers: [REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS],
     directives: [FORM_DIRECTIVES]
 })
 
@@ -237,7 +243,7 @@ class QuickEditorTagsInputComponent extends QuickEditorElement {
 @Component({
     selector: 'quick-editor',
     template: `
-    <form [ngFormModel]="quickEditorModel" class="form-horizontal">
+    <form [formGroup]="quickEditorModel" class="form-horizontal">
         <div #child></div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -257,6 +263,7 @@ class QuickEditorTagsInputComponent extends QuickEditorElement {
         </div>
     </form>
     `,
+    providers: [REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS],
     directives: [QuickEditorInputComponent, FORM_DIRECTIVES]
 })
 
@@ -272,7 +279,7 @@ export class QuickEditorComponent {
 
     childrenRef:Editable[] = [];
     isEditable:boolean = false;
-    quickEditorModel:ControlGroup;
+    quickEditorModel:FormGroup;
 
     @ViewChild('child', {read: ViewContainerRef})
     childContentPlace:ViewContainerRef;
@@ -298,7 +305,7 @@ export class QuickEditorComponent {
             this.dcl.loadNextToLocation(QuickEditorComponent.EDITOR_TYPE_MAP[metadata.type], this.childContentPlace)
                 .then((ref:ComponentRef<any>) => {
                     // update validator
-                    this.quickEditorModel.addControl(metadata.field, metadata.required ? new Control('', Validators.required) : new Control());
+                    this.quickEditorModel.addControl(metadata.field, metadata.required ? new FormControl('', Validators.required) : new FormControl());
 
                     ref.instance.formControl = this.quickEditorModel.find(metadata.field);
                     ref.instance.metadata = metadata;

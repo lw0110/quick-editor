@@ -1,8 +1,8 @@
 import {Input} from "@angular/core";
 import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
-import {Control} from "@angular/common";
 import {isArray} from "rxjs/util/isArray";
+import {FormControl} from "@angular/forms";
 
 export class QuickEditorElement implements Editable {
     origValue:any;
@@ -15,7 +15,7 @@ export class QuickEditorElement implements Editable {
     @Input()
     id:any;
     @Input()
-    formControl:Control;
+    formControl:FormControl;
 
     set originalValue(value:any) {
         this.origValue = isArray(value) ? value.slice(0) : value;
