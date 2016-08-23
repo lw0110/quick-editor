@@ -103,7 +103,7 @@ declare var google:any;
     `],
     inputs: ['originalValue'],
     providers: [REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS],
-    directives: [FORM_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 
 class QuickEditorGoogleMapComponent extends QuickEditorElement implements AfterViewInit {
@@ -264,7 +264,7 @@ class QuickEditorTagsInputComponent extends QuickEditorElement {
     </form>
     `,
     providers: [REACTIVE_FORM_PROVIDERS, FORM_PROVIDERS],
-    directives: [QuickEditorInputComponent, FORM_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
 })
 
 export class QuickEditorComponent {
@@ -272,10 +272,8 @@ export class QuickEditorComponent {
     metadataArray:EditorMetadata[];
     @Input()
     dataModel:any;
-    @Output()
-    onSave = new EventEmitter();
-    @Output()
-    onDelete = new EventEmitter();
+    @Output() onSave:EventEmitter<any> = new EventEmitter<any>();
+    @Output() onDelete:EventEmitter<any> = new EventEmitter<any>();
 
     childrenRef:Editable[] = [];
     isEditable:boolean = false;
@@ -307,7 +305,7 @@ export class QuickEditorComponent {
                     // update validator
                     this.quickEditorModel.addControl(metadata.field, metadata.required ? new FormControl('', Validators.required) : new FormControl());
 
-                    ref.instance.formControl = this.quickEditorModel.find(metadata.field);
+                    ref.instance.formControl = this.quickEditorModel.get(metadata.field);
                     ref.instance.metadata = metadata;
                     ref.instance.dataModel = this.dataModel;
                     ref.instance.originalValue = this.dataModel[metadata.field];
