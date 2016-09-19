@@ -1,3 +1,6 @@
+import {Injectable} from "@angular/core";
+
+@Injectable()
 export class EditorMetadataType {
     static TextInput = 'TextInput';
     static TextArea = 'TextArea';

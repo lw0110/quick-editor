@@ -11,8 +11,13 @@
   },
   "files": [
     "./quick-editor.ts",
+    "./quick-editor.module.ts",
     "./src/editable.ts",
     "./src/editor-metadata.ts",
+    "./src/quick-editor-input.component.ts",
+    "./src/quick-editor-text-area.component.ts",
+    "./src/quick-editor-google-map.component.ts",
+    "./src/quick-editor-tags-input.component.ts",
     "./src/quick-editor.component.ts",
     "./src/quick-editor-element.ts"
   ],

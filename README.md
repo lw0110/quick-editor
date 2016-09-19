@@ -1,4 +1,4 @@
-#Angular 2 (rc.5) Quick Editor
+#Angular 2 (2.0.0) Quick Editor
 [![version](https://img.shields.io/npm/v/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![downloads](https://img.shields.io/npm/dm/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![MIT Licence](https://img.shields.io/npm/l/quick-editor.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -64,7 +64,36 @@ Before using the script, please add following library into html header before co
 
 Import the Quick Editor Classes when required
 ```javascript
-import {QuickEditorComponent, EditorMetadata, EditorMetadataType} from "quick-editor";
+import {
+    QuickEditorModule,
+    QuickEditorInputComponent,
+    QuickEditorComponent,
+    QuickEditorTextAreaComponent,
+    QuickEditorGoogleMapComponent,
+    QuickEditorTagsInputComponent
+} from "quick-editor";
+
+
+@NgModule({
+    imports: [
+        BrowserModule, 
+        FormsModule, 
+        ReactiveFormsModule,
+        QuickEditorModule,
+        ...],
+    declarations: [...],
+    entryComponents: [
+        QuickEditorComponent,
+        QuickEditorInputComponent,
+        QuickEditorTextAreaComponent,
+        QuickEditorGoogleMapComponent,
+        QuickEditorTagsInputComponent],
+    bootstrap: [AppComponent],
+})
+
+export class AppModule {
+}
+
 ```
 
 The field name in EditorMetadata should be same as property name in data model.
