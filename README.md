@@ -1,10 +1,11 @@
-#Angular 2 (2.0.0) Quick Editor
+#Angular 2 (2.2.0) Quick Editor
 [![version](https://img.shields.io/npm/v/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![downloads](https://img.shields.io/npm/dm/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![MIT Licence](https://img.shields.io/npm/l/quick-editor.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 Quick Editor is Bootstrap 3 based Angular 2 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
 The editor provides Metadata way of configuration, which saves energy of writing lots UI code.
+The project has been updated to use typescript declaration files in node_modules/@type, if there is any pre installed global typings files, please uninstall.
 
 Currently, the editor supports 4 types of input,
 
