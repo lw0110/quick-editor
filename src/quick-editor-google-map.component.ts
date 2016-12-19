@@ -48,7 +48,8 @@ export class QuickEditorGoogleMapComponent extends QuickEditorElement implements
         this.map = new google.maps.Map(document.getElementById('qe-map-' + this.id), {
             zoom: 16,
             center: centerLatLng,
-            disableDefaultUI: true
+            disableDefaultUI: true,
+            zoomControl: true
         });
 
         this.marker = new google.maps.Marker({
