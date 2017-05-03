@@ -1,7 +1,7 @@
 {
   "name": "quick-editor",
-  "version": "0.1.1",
-  "description": "Angular 2 Bootstrap based editor",
+  "version": "0.2.0",
+  "description": "Angular 4 Bootstrap based editor",
   "main": "quick-editor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,32 +19,32 @@
   "author": "BTLW",
   "license": "MIT",
   "dependencies": {
-    "@angular/common": "~2.2.0",
-    "@angular/compiler": "~2.2.0",
-    "@angular/core": "~2.2.0",
-    "@angular/forms": "~2.2.0",
-    "@angular/http": "~2.2.0",
-    "@angular/platform-browser": "~2.2.0",
-    "@angular/platform-browser-dynamic": "~2.2.0",
-    "@angular/router": "~3.2.0",
-    "@angular/upgrade": "~2.2.0",
+    "@angular/animations": "^4.1.0",
+    "@angular/common": "^4.1.0",
+    "@angular/compiler": "^4.1.0",
+    "@angular/compiler-cli": "^4.1.0",
+    "@angular/core": "^4.1.0",
+    "@angular/forms": "^4.1.0",
+    "@angular/http": "^4.1.0",
+    "@angular/platform-browser": "^4.1.0",
+    "@angular/platform-browser-dynamic": "^4.1.0",
+    "@angular/platform-server": "^4.1.0",
+    "@angular/router": "^4.1.0",
 
-
-    "angular-in-memory-web-api": "~0.1.15",
+    "angular-in-memory-web-api": "~0.3.0",
+    "bootstrap": "^3.3.6",
     "core-js": "^2.4.1",
     "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "5.0.1",
     "systemjs": "0.19.39",
-    "zone.js": "^0.6.25",
-
-    "bootstrap": "^3.3.6"
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@types/core-js": "^0.9.34",
-    "@types/node": "^6.0.45",
-    "concurrently": "^3.0.0",
+    "concurrently": "^3.2.0",
     "lite-server": "^2.2.2",
-    "typescript": "^2.0.3"
+    "typescript": "^2.3.2",
+
+    "@types/node": "^6.0.46"
   },
   "typings": "./quick-editor.d.ts"
 }

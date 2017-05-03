@@ -40,19 +40,18 @@ export class QuickEditorTagsInputComponent extends QuickEditorElement {
     }
 
     ngAfterViewInit() {
-        var _this = this;
         this.tokenFieldRef = jQuery(this.elementRef.nativeElement).find('#tokenfield');
         this.tokenFieldRef.tokenfield({
             autocomplete: {
-                source: _this.autoCompleteSource,
+                source: this.autoCompleteSource,
                 delay: 100
             },
             showAutocompleteOnFocus: true
-        }).on('tokenfield:createdtoken', function () {
-            _this.updateCurrentValueFromUI();
-        }).on('tokenfield:removedtoken', function () {
-            _this.updateCurrentValueFromUI();
-        });
+        }).on('tokenfield:createdtoken', () =>
+            this.updateCurrentValueFromUI()
+        ).on('tokenfield:removedtoken',  () =>
+            this.updateCurrentValueFromUI()
+        );
         this.tokenFieldRef.tokenfield('disable');
     }
 
