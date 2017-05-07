@@ -2,10 +2,10 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class EditorMetadataType {
-    static TextInput = 'TextInput';
-    static TextArea = 'TextArea';
-    static GoogleMap = 'GoogleMap';
-    static TagsInput = 'TagsInput';
+    TextInput: string = 'TextInput';
+    TextArea: string = 'TextArea';
+    GoogleMap: string = 'GoogleMap';
+    TagsInput: string = 'TagsInput';
 }
 
 export interface EditorMetadata {

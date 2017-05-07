@@ -9,7 +9,7 @@ import {
     ReflectiveInjector,
     ComponentFactoryResolver
 } from "@angular/core";
-import {EditorMetadata} from "./editor-metadata";
+import * as QE from "./editor-metadata";
 import {Editable} from "./editable";
 import {FormBuilder, FormGroup, Validators, FormControl} from "@angular/forms";
 import {QuickEditorInputComponent} from "./quick-editor-input.component";
@@ -43,7 +43,7 @@ import {QuickEditorTagsInputComponent} from "./quick-editor-tags-input.component
 })
 
 export class QuickEditorComponent {
-    @Input() public metadataArray: EditorMetadata[];
+    @Input() public metadataArray: QE.EditorMetadata[];
     @Input() public dataModel: any;
     @Output() onSave: EventEmitter<any> = new EventEmitter<any>();
     @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
@@ -72,9 +72,9 @@ export class QuickEditorComponent {
     }
 
     inflateComponents() {
-        var fn = function (array: EditorMetadata[]) {
+        var fn = function (array: QE.EditorMetadata[]) {
             if (array.length == 0) return;
-            let metadata: EditorMetadata = array[array.length - 1];
+            let metadata: QE.EditorMetadata = array[array.length - 1];
             let factory = this.resolver.resolveComponentFactory(QuickEditorComponent.EDITOR_TYPE_MAP[metadata.type]);
             let injector = ReflectiveInjector.fromResolvedProviders([], this.childContentPlace.parentInjector);
             let ref = this.childContentPlace.createComponent(factory, 0, injector, []);

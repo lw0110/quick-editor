@@ -1,9 +1,9 @@
-#Angular 2 (2.2.0) Quick Editor
+#Angular 4 (4.1.1) Quick Editor
 [![version](https://img.shields.io/npm/v/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![downloads](https://img.shields.io/npm/dm/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![MIT Licence](https://img.shields.io/npm/l/quick-editor.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-Quick Editor is Bootstrap 3 based Angular 2 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
+Quick Editor is Bootstrap 3 based Angular 4 Quick Editor. This Editor suits your need if you need a simple UI editor quickly.
 The editor provides Metadata way of configuration, which saves energy of writing lots UI code.
 The project has been updated to use typescript declaration files in node_modules/@type, if there is any pre installed global typings files, please uninstall.
 
@@ -32,35 +32,20 @@ Setup the quick-editor through NPM
 npm install quick-editor --save
 ```
 
-Include the quick-editor component in systemjs.config.js
-```javascript
-var map = {
-    'app':                        'dist', // 'dist',
-    'rxjs':                       'node_modules/rxjs',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    '@angular':                   'node_modules/@angular',
-    'quick-editor':               'node_modules/quick-editor'
-};
-
-var packages = {
-    'app':                        { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':                       { defaultExtension: 'js' },
-    'angular2-in-memory-web-api': { defaultExtension: 'js' },
-    'quick-editor':               { main: 'quick-editor.js', defaultExtension: 'js' }
-};
+Before using the script, please add following library into .angular-cli.json
 ```
-
-Before using the script, please add following library into html header before coding.
-```
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-<script src="http://maps.googleapis.com/maps/api/js?v=3.23&key=your_google_api_key"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.min.css">
-<link rel="stylesheet" href="node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css">
-<link rel="stylesheet" href="node_modules/bootstrap-tokenfield/dist/css/tokenfield-typeahead.min.css">
+ "styles": [
+        "../node_modules/jquery-ui-dist/jquery-ui.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css",
+        "../node_modules/bootstrap-tokenfield/dist/css/tokenfield-typeahead.min.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/jquery-ui-dist/jquery-ui.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/bootstrap-tokenfield/dist/bootstrap-tokenfield.min.js"
+      ],
 ```
 
 Import the Quick Editor Classes when required

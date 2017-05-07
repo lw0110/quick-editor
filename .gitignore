@@ -1,5 +1,6 @@
 # Node generated files
 node_modules
+compiled
 typings
 jspm_packages
 npm-debug.log
@@ -9,6 +10,7 @@ Thumbs.db
 # Ignored files
 *.d.ts
 *.js
+*.metadata.json
 *.map
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio

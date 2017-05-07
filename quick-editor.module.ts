@@ -8,13 +8,6 @@ import {QuickEditorTextAreaComponent} from "./src/quick-editor-text-area.compone
 import {QuickEditorGoogleMapComponent} from "./src/quick-editor-google-map.component";
 import {QuickEditorTagsInputComponent} from "./src/quick-editor-tags-input.component";
 
-
-function getProviders(): any[] {
-    return [
-        {provide: EditorMetadataType, useClass: EditorMetadataType}
-    ];
-}
-
 @NgModule({
     imports: [
         BrowserModule, FormsModule, ReactiveFormsModule
@@ -34,11 +27,8 @@ function getProviders(): any[] {
         QuickEditorTagsInputComponent
     ],
     exports: [QuickEditorComponent],
-    providers: getProviders()
+    providers: [EditorMetadataType]
 })
 
 export class QuickEditorModule {
-    static getProviders(): any[] {
-        return getProviders();
-    }
 }

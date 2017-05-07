@@ -1,0 +1,5 @@
+<h1>
+  {{title}}
+</h1>
+<quick-editor [metadataArray]="metadataArray" [dataModel]="editorModel"
+              (onSave)="onSaveObject($event)" (onDelete)="onDeleteObject($event)"></quick-editor>

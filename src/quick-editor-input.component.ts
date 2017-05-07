@@ -1,10 +1,7 @@
 import {Component} from "@angular/core";
 import {QuickEditorElement} from "./quick-editor-element";
 
-declare var module: {id: string};
-
 @Component({
-    moduleId: module.id,
     selector: 'quick-editor-input',
     template: `
     <style>

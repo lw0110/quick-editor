@@ -1,8 +1,8 @@
 import {Input} from "@angular/core";
-import {EditorMetadata} from "./editor-metadata";
 import {Editable} from "./editable";
 import {isArray} from "rxjs/util/isArray";
 import {FormControl} from "@angular/forms";
+import * as QE from "./editor-metadata";
 
 export class QuickEditorElement implements Editable {
     origValue:any;
@@ -11,7 +11,7 @@ export class QuickEditorElement implements Editable {
     dataModel:any;
 
     @Input()
-    metadata:EditorMetadata;
+    metadata:QE.EditorMetadata;
     @Input()
     id:any;
     @Input()
