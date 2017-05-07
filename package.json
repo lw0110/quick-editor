@@ -1,6 +1,6 @@
 {
   "name": "quick-editor",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Angular 4 Bootstrap based editor",
   "main": "quick-editor.js",
   "scripts": {
