@@ -1,4 +1,4 @@
-#Angular 4 (4.1.1) Quick Editor
+# Angular 4 (4.1.1) Quick Editor
 [![version](https://img.shields.io/npm/v/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![downloads](https://img.shields.io/npm/dm/quick-editor.svg?style=flat-square)](https://www.npmjs.com/package/quick-editor)
 [![MIT Licence](https://img.shields.io/npm/l/quick-editor.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -16,7 +16,7 @@ Currently, the editor supports 4 types of input,
 
 More types of inputs will be added soon.
 
-#Feature
+# Feature
 * onSave onDelete event binder
 * UI Read-Only Mode
 * Dirty field indicator
@@ -26,7 +26,7 @@ More types of inputs will be added soon.
 
 ![quick-editor](https://cloud.githubusercontent.com/assets/10338146/15510393/a6c9b684-2209-11e6-8b90-fcea5c52c051.png)
 
-#How To Use
+# How To Use
 Setup the quick-editor through NPM
 ```javascirpt
 npm install quick-editor --save
@@ -74,7 +74,7 @@ import {
         QuickEditorTextAreaComponent,
         QuickEditorGoogleMapComponent,
         QuickEditorTagsInputComponent],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 
 export class AppModule {
